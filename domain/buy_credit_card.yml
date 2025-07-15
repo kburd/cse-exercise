@@ -3,16 +3,24 @@ slots:
 
   credit_card_type:
     type: text
+    mappings:
+    - type: from_llm
 
   delivery_type:
     type: text
+    mappings:
+    - type: from_llm
 
   delivery_address:
     type: text
+    mappings:
+    - type: from_llm
 
   confirm_recap:
     type: bool
-  
+    mappings:
+      - type: from_llm
+
 responses:
 
   utter_ask_credit_card_type:
@@ -27,6 +35,9 @@ responses:
         - title: "American express"
           payload: "/SetSlots(credit_card_type=American express)"
 
+  utter_invalid_credit_card_type:
+    - text: "Please provide a valid credit card provider"
+
   utter_ask_delivery_type:
     - text: |
         Okay let's move to the next step of the credit card purchase
@@ -37,10 +48,17 @@ responses:
         - title: "to the closest bank near you"
           payload: "/SetSlots(delivery_type=Bank)"
 
+  utter_invalid_delivery_type:
+    - text: "Please provide a valid credit card delivery method"
+
   utter_ask_delivery_address:
     - text: |
         Understood!
         Can you provide me your full address please?
+  
+  utter_invalid_delivery_address:
+    - text: |
+        That address was not formatted in a way we can process, can you please try again
 
   utter_ask_present_credit_card_order:
     - text: |

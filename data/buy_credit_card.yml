@@ -4,14 +4,25 @@ flows:
     steps:
       - collect: credit_card_type
         ask_before_filling: True
+        rejections:
+          - if: slots.credit_card_type != "Visa" and slots.credit_card_type != "Master card" and slots.credit_card_type != "American express"
+            utter: utter_invalid_credit_card_type
 
       - collect: delivery_type
         ask_before_filling: True
+        rejections:
+          - if: slots.delivery_type != "Home" and slots.delivery_type != "Bank"
+            utter: utter_invalid_delivery_type
+
+      - noop: true
         next:
         - if: slots.delivery_type == "Home"
           then:
           - collect: delivery_address
             ask_before_filling: True
+            rejections:
+              - if: not (slots.delivery_address matches "^\d+,\s+[A-Za-z\s]+,\s+[A-Za-z\s]+$")
+                utter: utter_invalid_delivery_address
             next: confirm_recap_step
         - else: 
           - set_slots:
