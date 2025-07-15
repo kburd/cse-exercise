@@ -23,3 +23,8 @@ flows:
       
       - collect: confirm_recap
         ask_before_filling: True
+        next:
+        - if: slots.confirm_recap == False
+          then: 
+          - link: pattern_human_handoff
+        - else: "END"
