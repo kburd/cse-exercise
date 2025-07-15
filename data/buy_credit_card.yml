@@ -4,10 +4,22 @@ flows:
     steps:
       - collect: credit_card_type
         ask_before_filling: True
+
       - collect: delivery_type
         ask_before_filling: True
-      - collect: home_address_from_user
-        ask_before_filling: True
-      - action: utter_ask_present_credit_card_order
+        next:
+        - if: slots.delivery_type == "Home"
+          then:
+          - collect: delivery_address
+            ask_before_filling: True
+            next: confirm_recap_step
+        - else: 
+          - set_slots:
+            - delivery_address: "123, Main Street, New York USA" # mocking an API call based on user GPS location
+            next: confirm_recap_step
+        
+      - id: confirm_recap_step
+        action: utter_ask_present_credit_card_order
+      
       - collect: confirm_recap
         ask_before_filling: True

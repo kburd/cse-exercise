@@ -7,7 +7,7 @@ slots:
   delivery_type:
     type: text
 
-  home_address_from_user:
+  delivery_address:
     type: text
 
   confirm_recap:
@@ -37,7 +37,7 @@ responses:
         - title: "to the closest bank near you"
           payload: "/SetSlots(delivery_type=Bank)"
 
-  utter_ask_home_address_from_user:
+  utter_ask_delivery_address:
     - text: |
         Understood!
         Can you provide me your full address please?
@@ -46,8 +46,9 @@ responses:
     - text: |
         Let's make sure all the information provided are in order
         Credit card type : {credit_card_type}
-        Delivery type : {credit_card_delivery_type}
-        Home address : {home_address_from_user}
+        Delivery type : {delivery_type}
+        {delivery_type} address : {delivery_address}
+
 
   utter_ask_confirm_recap:
     - text: |
