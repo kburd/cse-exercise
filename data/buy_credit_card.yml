@@ -4,7 +4,7 @@ flows:
     steps:
       - collect: credit_card_type
         ask_before_filling: True
-      - collect: credit_card_delivery_type
+      - collect: delivery_type
         ask_before_filling: True
       - collect: home_address_from_user
         ask_before_filling: True
