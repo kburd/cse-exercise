@@ -1,0 +1,13 @@
+flows:
+  buy_credit_card:
+    description: help's the user purchase a credit card
+    steps:
+      - collect: credit_card_type
+        ask_before_filling: True
+      - collect: credit_card_delivery_type
+        ask_before_filling: True
+      - collect: home_address_from_user
+        ask_before_filling: True
+      - action: utter_ask_present_credit_card_order
+      - collect: confirm_recap
+        ask_before_filling: True
